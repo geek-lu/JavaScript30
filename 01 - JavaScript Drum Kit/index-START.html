@@ -60,6 +60,20 @@
 
 <script>
 
+
+document.addEventListener('keydown', ({keyCode}) => {
+  const [dom, audio] = document.querySelectorAll(`[data-key="${keyCode}"]`);
+  const handleFunc = () => {
+    dom.className = 'key';
+    document.removeEventListener('transitionend', handleFunc);
+  }
+
+  document.addEventListener('transitionend', handleFunc);
+  dom.className += ' playing';
+  audio.play();
+  outDom = dom;
+});
+
 </script>
 
 
