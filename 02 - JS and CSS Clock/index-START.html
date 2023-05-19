@@ -63,12 +63,29 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transition: all 0.05s;
     }
 
   </style>
 
   <script>
+    const allDeg = 360;
+    const doms = document.querySelectorAll('.hand');
 
+    doms.forEach(dom => {
+      dom.style['transform-origin']='right';
+    })
+    
+    const [hourDom, minuteDom, second] = doms;
+
+    setInterval(() => {
+      const now = new Date();
+      
+      hourDom.style.transform = `rotate(${now.getHours() / 24 * allDeg + 90}deg)`;
+      minuteDom.style.transform = `rotate(${now.getMinutes() / 60 * allDeg + 90}deg)`;
+      second.style.transform = `rotate(${now.getSeconds() / 60 * allDeg + 90}deg)`
+    }, 1000)
 
   </script>
 </body>
