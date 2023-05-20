@@ -19,13 +19,25 @@
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500"/>
 
   <style>
+
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
 
     /*
       misc styles, nothing to do with CSS variables
     */
+    img {
+      background-color: var(--base);
+      padding: var(--spacing);
+      filter: blur(var(--blur));
+    }
 
     body {
       text-align: center;
@@ -46,6 +58,15 @@
   </style>
 
   <script>
+    const domIds = ['spacing', 'blur', 'base'];
+
+    domIds.forEach(id => {
+      const dom = document.getElementById(id);
+      dom.oninput = ({target: {value, name, dataset: {sizing}}}) => {
+        document.documentElement.style.setProperty(`--${name}`, `${value}${sizing || ''}`)
+      }
+    })
+
   </script>
 
 </body>
